@@ -93,31 +93,6 @@ if (Config.environment.isDevelopment) {
 // Export for use in other modules
 window.QuickWordFinderConfig = Config;
 
-// Also make it available as a module export for future bundling
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = Config;
-}
-
-// Environment-specific initialization
-document.addEventListener('DOMContentLoaded', function() {
-    // Add environment class to body for CSS targeting
-    if (Config.environment.isDevelopment) {
-        document.body.classList.add('env-development');
-    } else if (Config.environment.isProduction) {
-        document.body.classList.add('env-production');
-    } else if (Config.environment.isVercelPreview) {
-        document.body.classList.add('env-preview');
-    }
-
-    // Set up global error handling
-    if (Config.environment.isProduction) {
-        window.addEventListener('error', function(e) {
-            // Log errors in production (will integrate with monitoring later)
-            console.error('Production Error:', e.error);
-        });
-    }
-});
-
 // Utility functions
 Config.utils = {
     /**
@@ -150,5 +125,22 @@ Config.utils = {
     }
 };
 
-// Export the configuration
-export default Config;
+// Environment-specific initialization
+document.addEventListener('DOMContentLoaded', function() {
+    // Add environment class to body for CSS targeting
+    if (Config.environment.isDevelopment) {
+        document.body.classList.add('env-development');
+    } else if (Config.environment.isProduction) {
+        document.body.classList.add('env-production');
+    } else if (Config.environment.isVercelPreview) {
+        document.body.classList.add('env-preview');
+    }
+
+    // Set up global error handling
+    if (Config.environment.isProduction) {
+        window.addEventListener('error', function(e) {
+            // Log errors in production (will integrate with monitoring later)
+            console.error('Production Error:', e.error);
+        });
+    }
+});
