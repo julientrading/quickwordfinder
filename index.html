@@ -1,1208 +1,296 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Essential Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuickWords - Your Friendly Word Finder</title>
-    <style>
-        /* Reset and Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>QuickWordFinder - Fast Word Finder for Wordle, Scrabble & Crosswords</title>
+    <meta name="description" content="Find words instantly for Wordle, Scrabble, and crossword puzzles. Advanced search with pattern matching, letter positions, and game-specific tools.">
+    <meta name="keywords" content="word finder, wordle solver, scrabble helper, crossword solver, word games, anagram">
+    <meta name="author" content="QuickWordFinder">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="QuickWordFinder - Fast Word Finder for Word Games">
+    <meta property="og:description" content="Find words instantly for Wordle, Scrabble, and crossword puzzles with our advanced search tools.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://quickwordfinder.com">
+    <meta property="og:site_name" content="QuickWordFinder">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="QuickWordFinder - Fast Word Finder">
+    <meta name="twitter:description" content="Find words instantly for Wordle, Scrabble, and crossword puzzles.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://quickwordfinder.com">
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="src/css/main.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "QuickWordFinder",
+        "description": "Fast word finder for Wordle, Scrabble, and crossword puzzles",
+        "url": "https://quickwordfinder.com",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "QuickWordFinder"
         }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: #2d3748;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        header {
-            background: rgba(255, 255, 255, 0.98);
-            padding: 20px 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        header h1 {
-            font-size: 28px;
-            color: #667eea;
-            font-weight: 800;
-            display: inline-block;
-        }
-
-        .tagline {
-            color: #718096;
-            font-size: 14px;
-            margin-top: -5px;
-        }
-
-        /* Main Content Area */
-        main {
-            padding: 30px 0 50px;
-        }
-
-        /* Search Box Section */
-        .search-box {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-
-        .search-box h2 {
-            font-size: 24px;
-            color: #2d3748;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        /* Sentence Builder */
-        .search-sentence {
-            font-size: 22px;
-            color: #2d3748;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .inline-select {
-            background: #f7fafc;
-            border: 2px solid #667eea;
-            border-radius: 8px;
-            padding: 5px 15px;
-            font-size: 22px;
-            font-weight: bold;
-            color: #667eea;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .inline-select:hover {
-            background: #667eea;
-            color: white;
-        }
-
-        .inline-select:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
-        }
-
-        /* Filter Introduction */
-        .filter-intro {
-            font-size: 18px;
-            color: #4a5568;
-            text-align: center;
-            margin: 25px 0 20px;
-            font-style: italic;
-        }
-
-        /* Filter Pills */
-        .filter-pills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        .filter-pill {
-            background: #f7fafc;
-            border-radius: 25px;
-            padding: 10px 20px;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .pill-checkbox {
-            display: none;
-        }
-
-        .pill-checkbox:checked + .pill-label {
-            background: #667eea;
-            color: white;
-            border-radius: 25px;
-            padding: 8px 15px;
-        }
-
-        .pill-checkbox:checked + .pill-label .pill-input {
-            background: white;
-            color: #2d3748;
-        }
-
-        .pill-label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            padding: 8px 15px;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-        }
-
-        .pill-label:hover {
-            background: #edf2f7;
-        }
-
-        .pill-input {
-            border: none;
-            background: transparent;
-            width: 80px;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .pill-input:focus {
-            outline: none;
-            background: white;
-            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.5);
-        }
-        
-        .pill-label small {
-            font-weight: normal;
-            line-height: 1.4;
-        }
-
-        .single-letter {
-            width: 40px;
-            text-align: center;
-        }
-
-        /* Search Status */
-        .search-status {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .searching-text {
-            color: #718096;
-            font-size: 14px;
-            font-style: italic;
-        }
-        
-        #resetBtn {
-            background: #e2e8f0;
-            border: none;
-            padding: 6px 16px;
-            border-radius: 20px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            font-size: 14px;
-            color: #4a5568;
-            transition: all 0.3s ease;
-        }
-        
-        #resetBtn:hover {
-            background: #cbd5e0;
-            transform: translateY(-1px);
-        }
-
-        /* Game Mode Buttons */
-        .quick-modes {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-        }
-
-        .mode-intro {
-            text-align: center;
-            color: #4a5568;
-            margin-bottom: 15px;
-            font-size: 16px;
-        }
-
-        .mode-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .mode-button {
-            background: #f7fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 12px 20px;
-            font-size: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            color: #4a5568;
-        }
-
-        .mode-button:hover {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-        }
-
-        /* Results Section */
-        .results-section {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-        }
-
-        .results-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .results-header h3 {
-            color: #2d3748;
-            font-size: 20px;
-        }
-
-        .results-header span {
-            color: #667eea;
-            font-weight: bold;
-        }
-
-        /* Sort Options */
-        .sort-options {
-            display: flex;
-            gap: 10px;
-        }
-
-        .sort-pill {
-            background: #f7fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 20px;
-            padding: 6px 16px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: #4a5568;
-        }
-
-        .sort-pill:hover {
-            background: #edf2f7;
-        }
-
-        .sort-pill.active {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
-        }
-
-        /* Word Grid */
-        .word-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 15px;
-        }
-
-        .word-card {
-            background: #f7fafc;
-            border-radius: 12px;
-            padding: 15px;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            position: relative;
-        }
-
-        .word-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            border-color: #667eea;
-        }
-
-        .word {
-            display: block;
-            font-size: 20px;
-            font-weight: bold;
-            color: #2d3748;
-            letter-spacing: 2px;
-            margin-bottom: 5px;
-        }
-
-        .word-score {
-            display: block;
-            font-size: 12px;
-            color: #718096;
-        }
-
-        .word-card.popular {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-        }
-
-        .word-card.popular .word,
-        .word-card.popular .word-score {
-            color: white;
-        }
-
-        .word-badge {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: #48bb78;
-            color: white;
-            font-size: 10px;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-weight: bold;
-        }
-
-        /* Trust Signals */
-        .trust-signals {
-            display: flex;
-            justify-content: space-around;
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .signal-item {
-            text-align: center;
-        }
-
-        .signal-number {
-            display: block;
-            font-size: 28px;
-            font-weight: bold;
-            color: #667eea;
-        }
-
-        .signal-label {
-            display: block;
-            font-size: 14px;
-            color: #718096;
-            margin-top: 5px;
-        }
-
-        /* Footer */
-        footer {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 20px 0;
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        footer p {
-            color: #718096;
-            font-size: 14px;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 640px) {
-            .search-box {
-                padding: 20px;
-            }
-
-            .search-sentence {
-                font-size: 18px;
-            }
-
-            .inline-select {
-                font-size: 18px;
-            }
-
-            .filter-pills {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .filter-pill {
-                width: 100%;
-            }
-
-            .pill-label {
-                justify-content: space-between;
-            }
-
-            .pill-input {
-                width: 100px;
-            }
-
-            .mode-buttons {
-                flex-direction: column;
-            }
-
-            .mode-button {
-                width: 100%;
-            }
-
-            .word-grid {
-                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            }
-
-            .results-header {
-                flex-direction: column;
-                align-items: stretch;
-                text-align: center;
-            }
-
-            .sort-options {
-                justify-content: center;
-            }
-        }
-    </style>
-    <script>
-        // Small word list for testing (in real app, this would be 170,000+ words)
-        const wordDatabase = [
-            // 3 letter words
-            { word: 'CAT', length: 3, points: 5, common: true },
-            { word: 'DOG', length: 3, points: 5, common: true },
-            { word: 'RUN', length: 3, points: 3, common: true },
-            { word: 'BAT', length: 3, points: 5, common: false },
-            
-            // 4 letter words
-            { word: 'BIRD', length: 4, points: 7, common: true },
-            { word: 'TREE', length: 4, points: 4, common: true },
-            { word: 'STAR', length: 4, points: 4, common: true },
-            { word: 'BEAR', length: 4, points: 6, common: false },
-            
-            // 5 letter words (good for Wordle)
-            { word: 'CRANE', length: 5, points: 7, common: true },
-            { word: 'SLATE', length: 5, points: 5, common: true },
-            { word: 'TRACE', length: 5, points: 7, common: false },
-            { word: 'STARE', length: 5, points: 5, common: true },
-            { word: 'AROSE', length: 5, points: 5, common: false },
-            { word: 'TEARS', length: 5, points: 5, common: false },
-            { word: 'STEAM', length: 5, points: 7, common: true },
-            { word: 'STONE', length: 5, points: 5, common: true },
-            
-            // 6 letter words
-            { word: 'FRIEND', length: 6, points: 10, common: true },
-            { word: 'CASTLE', length: 6, points: 8, common: true },
-            { word: 'GARDEN', length: 6, points: 8, common: true },
-            { word: 'STREAM', length: 6, points: 8, common: false },
-            
-            // 7 letter words
-            { word: 'RAINBOW', length: 7, points: 12, common: true },
-            { word: 'KITCHEN', length: 7, points: 16, common: true },
-            { word: 'JOURNEY', length: 7, points: 17, common: false },
-        ];
-        
-        // Global variables for state management
-        let currentSort = 'common'; // Default sort
-        let wordGrid, resultCount, searchTitle, searchSentence, filterIntro, filterPills, searchStatus;
-        let sortButtons, wordleBtn, scrabbleBtn, crosswordBtn;
-
-        // Wait for page to load
-        document.addEventListener('DOMContentLoaded', function() {
-            
-            // Get main UI elements
-            wordGrid = document.getElementById('wordGrid');
-            resultCount = document.getElementById('resultCount');
-            
-            // Game mode buttons
-            wordleBtn = document.querySelector('.wordle-mode');
-            scrabbleBtn = document.querySelector('.scrabble-mode');
-            crosswordBtn = document.querySelector('.crossword-mode');
-            
-            // Interface elements to modify
-            searchTitle = document.querySelector('.search-box h2');
-            searchSentence = document.querySelector('.search-sentence');
-            filterIntro = document.querySelector('.filter-intro');
-            filterPills = document.querySelector('.filter-pills');
-            searchStatus = document.querySelector('.search-status');
-            
-            // Sort buttons
-            sortButtons = document.querySelectorAll('.sort-pill');
-            
-            // Enable/disable inputs based on checkboxes
-            function setupCheckboxes() {
-                // Containing letters
-                containingCheckbox.addEventListener('change', function() {
-                    containingInput.disabled = !this.checked;
-                    if (this.checked) containingInput.focus();
-                    searchWords();
-                });
-                
-                // Starting letter
-                startingCheckbox.addEventListener('change', function() {
-                    startingInput.disabled = !this.checked;
-                    if (this.checked) startingInput.focus();
-                    searchWords();
-                });
-                
-                // Ending letter
-                endingCheckbox.addEventListener('change', function() {
-                    endingInput.disabled = !this.checked;
-                    if (this.checked) endingInput.focus();
-                    searchWords();
-                });
-                
-                // Excluding letters
-                excludingCheckbox.addEventListener('change', function() {
-                    excludingInput.disabled = !this.checked;
-                    if (this.checked) excludingInput.focus();
-                    searchWords();
-                });
-            }
-            
-            // Main search function
-            function searchWords() {
-                // Check if we're in default mode (elements exist)
-                const lengthElement = document.getElementById('wordLength');
-                if (!lengthElement) return; // We're in a game mode, don't use default search
-                
-                const length = parseInt(lengthElement.value);
-                
-                // Get current filter elements (they might not exist in game modes)
-                const currentContainingCheckbox = document.getElementById('useContaining');
-                const currentContainingInput = document.getElementById('containingLetters');
-                const currentStartingCheckbox = document.getElementById('useStarting');
-                const currentStartingInput = document.getElementById('startingLetter');
-                const currentEndingCheckbox = document.getElementById('useEnding');
-                const currentEndingInput = document.getElementById('endingLetter');
-                const currentExcludingCheckbox = document.getElementById('useExcluding');
-                const currentExcludingInput = document.getElementById('excludingLetters');
-                
-                // Filter words based on criteria
-                let results = wordDatabase.filter(item => {
-                    // Check word length
-                    if (item.length !== length) return false;
-                    
-                    // Check containing letters (if enabled)
-                    if (currentContainingCheckbox && currentContainingCheckbox.checked && currentContainingInput.value) {
-                        const letters = currentContainingInput.value.toUpperCase().replace(/[^A-Z]/g, '').split('');
-                        for (let letter of letters) {
-                            if (!item.word.includes(letter)) return false;
-                        }
-                    }
-                    
-                    // Check starting letter (if enabled)
-                    if (currentStartingCheckbox && currentStartingCheckbox.checked && currentStartingInput.value) {
-                        const startLetter = currentStartingInput.value.toUpperCase();
-                        if (!item.word.startsWith(startLetter)) return false;
-                    }
-                    
-                    // Check ending letter (if enabled)
-                    if (currentEndingCheckbox && currentEndingCheckbox.checked && currentEndingInput.value) {
-                        const endLetter = currentEndingInput.value.toUpperCase();
-                        if (!item.word.endsWith(endLetter)) return false;
-                    }
-                    
-                    // Check excluded letters (if enabled)
-                    if (currentExcludingCheckbox && currentExcludingCheckbox.checked && currentExcludingInput.value) {
-                        const excluded = currentExcludingInput.value.toUpperCase().replace(/[^A-Z]/g, '').split('');
-                        for (let letter of excluded) {
-                            if (item.word.includes(letter)) return false;
-                        }
-                    }
-                    
-                    return true;
-                });
-                
-                // Sort results
-                results = sortWords(results, currentSort);
-                
-                // Display results
-                displayWords(results);
-            }
-            
-            // Sort words based on selected criteria
-            function sortWords(words, sortType) {
-                switch(sortType) {
-                    case 'alpha':
-                        return words.sort((a, b) => a.word.localeCompare(b.word));
-                    case 'points':
-                        return words.sort((a, b) => b.points - a.points);
-                    case 'common':
-                    default:
-                        // Put common words first, then sort alphabetically
-                        return words.sort((a, b) => {
-                            if (a.common && !b.common) return -1;
-                            if (!a.common && b.common) return 1;
-                            return a.word.localeCompare(b.word);
-                        });
-                }
-            }
-            
-            // Display words in the grid
-            function displayWords(words) {
-                // Update count
-                resultCount.textContent = words.length;
-                
-                // Clear grid
-                wordGrid.innerHTML = '';
-                
-                if (words.length === 0) {
-                    wordGrid.innerHTML = '<p class="no-results">No words found. Try adjusting your filters!</p>';
-                    return;
-                }
-                
-                // Add each word as a card
-                words.forEach(item => {
-                    const card = document.createElement('div');
-                    card.className = 'word-card' + (item.common ? ' popular' : '');
-                    
-                    card.innerHTML = `
-                        <span class="word">${item.word}</span>
-                        <span class="word-score">${item.points} pts</span>
-                        ${item.common ? '<span class="word-badge">Popular</span>' : ''}
-                    `;
-                    
-                    wordGrid.appendChild(card);
-                });
-            }
-            
-            // Set up game mode buttons
-            function setupGameModes() {
-                // Store original HTML for reset
-                const originalTitle = searchTitle.innerHTML;
-                const originalSentence = searchSentence.innerHTML;
-                const originalFilters = filterPills.innerHTML;
-                
-                // Reset to default mode
-                function resetToDefault() {
-                    searchTitle.innerHTML = originalTitle;
-                    searchSentence.innerHTML = originalSentence;
-                    filterIntro.style.display = 'block';
-                    filterIntro.innerHTML = '...and with that, I need it to:';
-                    filterPills.innerHTML = originalFilters;
-                    
-                    // Re-get all the filter elements after resetting HTML
-                    const newContainingCheckbox = document.getElementById('useContaining');
-                    const newContainingInput = document.getElementById('containingLetters');
-                    const newStartingCheckbox = document.getElementById('useStarting');
-                    const newStartingInput = document.getElementById('startingLetter');
-                    const newEndingCheckbox = document.getElementById('useEnding');
-                    const newEndingInput = document.getElementById('endingLetter');
-                    const newExcludingCheckbox = document.getElementById('useExcluding');
-                    const newExcludingInput = document.getElementById('excludingLetters');
-                    const newWordLengthSelect = document.getElementById('wordLength');
-                    
-                    // Re-attach checkbox listeners
-                    newContainingCheckbox.addEventListener('change', function() {
-                        newContainingInput.disabled = !this.checked;
-                        if (this.checked) newContainingInput.focus();
-                        searchWords();
-                    });
-                    
-                    newStartingCheckbox.addEventListener('change', function() {
-                        newStartingInput.disabled = !this.checked;
-                        if (this.checked) newStartingInput.focus();
-                        searchWords();
-                    });
-                    
-                    newEndingCheckbox.addEventListener('change', function() {
-                        newEndingInput.disabled = !this.checked;
-                        if (this.checked) newEndingInput.focus();
-                        searchWords();
-                    });
-                    
-                    newExcludingCheckbox.addEventListener('change', function() {
-                        newExcludingInput.disabled = !this.checked;
-                        if (this.checked) newExcludingInput.focus();
-                        searchWords();
-                    });
-                    
-                    // Re-attach instant search listeners
-                    newWordLengthSelect.addEventListener('change', searchWords);
-                    let searchTimeout;
-                    [newContainingInput, newStartingInput, newEndingInput, newExcludingInput].forEach(input => {
-                        input.addEventListener('input', function() {
-                            clearTimeout(searchTimeout);
-                            searchTimeout = setTimeout(searchWords, 300);
-                        });
-                    });
-                    
-                    searchWords();
-                }
-                
-                // Add Reset button to search status
-                searchStatus.innerHTML = `
-                    <button id="resetBtn" style="background: #e2e8f0; border: none; padding: 6px 16px; border-radius: 20px; margin-bottom: 10px; cursor: pointer; font-size: 14px; color: #4a5568;">↺ Reset all</button>
-                    <br>
-                    <span class="searching-text">✨ Results update as you type</span>
-                `;
-                
-                document.getElementById('resetBtn').addEventListener('click', resetToDefault);
-                
-                // Wordle mode - 5 letters with position-based filters
-                wordleBtn.addEventListener('click', function() {
-                    searchTitle.innerHTML = '🟩 Wordle Mode';
-                    searchSentence.innerHTML = 'Help me solve today\'s Wordle!';
-                    filterIntro.style.display = 'block';
-                    filterIntro.innerHTML = 'Here\'s what I know:';
-                    
-                    filterPills.innerHTML = `
-                        <div class="filter-pill" style="width: 100%;">
-                            <label class="pill-label" style="display: block;">
-                                <span style="color: #48bb78; font-weight: bold;">Green letters</span> (correct position):
-                                <input type="text" class="pill-input" style="width: 200px;" placeholder="1:S, 3:A, 5:E" id="greenLetters">
-                                <small style="display: block; color: #718096; margin-top: 5px;">Format: position:letter (e.g., 2:R)</small>
-                            </label>
-                        </div>
-                        <div class="filter-pill" style="width: 100%;">
-                            <label class="pill-label" style="display: block;">
-                                <span style="color: #ecc94b; font-weight: bold;">Yellow letters</span> (wrong position):
-                                <input type="text" class="pill-input" style="width: 200px;" placeholder="R, A, T" id="yellowLetters">
-                                <small style="display: block; color: #718096; margin-top: 5px;">Letters that exist but not where you tried them</small>
-                            </label>
-                        </div>
-                        <div class="filter-pill" style="width: 100%;">
-                            <label class="pill-label" style="display: block;">
-                                <span style="color: #718096; font-weight: bold;">Gray letters</span> (not in word):
-                                <input type="text" class="pill-input" style="width: 200px;" placeholder="X, Z, Q" id="grayLetters">
-                                <small style="display: block; color: #718096; margin-top: 5px;">Letters that aren't in the word at all</small>
-                            </label>
-                        </div>
-                    `;
-                    
-                    // Set up Wordle-specific search
-                    const greenInput = document.getElementById('greenLetters');
-                    const yellowInput = document.getElementById('yellowLetters');
-                    const grayInput = document.getElementById('grayLetters');
-                    
-                    function wordleSearch() {
-                        let results = wordDatabase.filter(item => {
-                            if (item.length !== 5) return false;
-                            
-                            // Check green letters (position:letter format)
-                            if (greenInput.value) {
-                                const greens = greenInput.value.split(',').map(s => s.trim());
-                                for (let green of greens) {
-                                    if (green.includes(':')) {
-                                        const [pos, letter] = green.split(':');
-                                        if (item.word[parseInt(pos)-1] !== letter.toUpperCase()) return false;
-                                    }
-                                }
-                            }
-                            
-                            // Check yellow letters (must be in word)
-                            if (yellowInput.value) {
-                                const yellows = yellowInput.value.toUpperCase().replace(/[^A-Z]/g, '').split('');
-                                for (let letter of yellows) {
-                                    if (!item.word.includes(letter)) return false;
-                                }
-                            }
-                            
-                            // Check gray letters (must NOT be in word)
-                            if (grayInput.value) {
-                                const grays = grayInput.value.toUpperCase().replace(/[^A-Z]/g, '').split('');
-                                for (let letter of grays) {
-                                    if (item.word.includes(letter)) return false;
-                                }
-                            }
-                            
-                            return true;
-                        });
-                        
-                        displayWords(sortWords(results, currentSort));
-                    }
-                    
-                    // Add listeners
-                    [greenInput, yellowInput, grayInput].forEach(input => {
-                        input.addEventListener('input', function() {
-                            setTimeout(wordleSearch, 300);
-                        });
-                    });
-                    
-                    wordleSearch();
-                });
-                
-                // Scrabble mode - with tile letters
-                scrabbleBtn.addEventListener('click', function() {
-                    searchTitle.innerHTML = '🎯 Scrabble Helper';
-                    searchSentence.innerHTML = `
-                        I need a 
-                        <select id="scrabbleLength" class="inline-select">
-                            <option value="0">any</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                        </select>
-                        letter word
-                    `;
-                    filterIntro.style.display = 'block';
-                    filterIntro.innerHTML = 'Using my tiles:';
-                    
-                    filterPills.innerHTML = `
-                        <div class="filter-pill" style="width: 100%;">
-                            <label class="pill-label" style="display: block;">
-                                My Scrabble tiles:
-                                <input type="text" class="pill-input" style="width: 200px;" placeholder="R, A, N, E, S, T, ?" id="scrabbleTiles" autofocus>
-                                <small style="display: block; color: #718096; margin-top: 5px;">Use ? for blank tiles. Words will use only these letters.</small>
-                            </label>
-                        </div>
-                        <div class="filter-pill">
-                            <input type="checkbox" id="scrabbleStart" class="pill-checkbox">
-                            <label for="scrabbleStart" class="pill-label">
-                                starts with
-                                <input type="text" class="pill-input single-letter" placeholder="S" maxlength="1" id="scrabbleStartLetter" disabled>
-                            </label>
-                        </div>
-                        <div class="filter-pill">
-                            <input type="checkbox" id="scrabbleEnd" class="pill-checkbox">
-                            <label for="scrabbleEnd" class="pill-label">
-                                ends with
-                                <input type="text" class="pill-input single-letter" placeholder="T" maxlength="1" id="scrabbleEndLetter" disabled>
-                            </label>
-                        </div>
-                    `;
-                    
-                    // Set up Scrabble search
-                    const lengthSelect = document.getElementById('scrabbleLength');
-                    const tilesInput = document.getElementById('scrabbleTiles');
-                    const startCheck = document.getElementById('scrabbleStart');
-                    const startInput = document.getElementById('scrabbleStartLetter');
-                    const endCheck = document.getElementById('scrabbleEnd');
-                    const endInput = document.getElementById('scrabbleEndLetter');
-                    
-                    // Enable/disable optional filters
-                    startCheck.addEventListener('change', function() {
-                        startInput.disabled = !this.checked;
-                        if (this.checked) startInput.focus();
-                    });
-                    
-                    endCheck.addEventListener('change', function() {
-                        endInput.disabled = !this.checked;
-                        if (this.checked) endInput.focus();
-                    });
-                    
-                    function scrabbleSearch() {
-                        const tiles = tilesInput.value.toUpperCase().replace(/[^A-Z?]/g, '').split('');
-                        const desiredLength = parseInt(lengthSelect.value);
-                        
-                        let results = wordDatabase.filter(item => {
-                            // Check length if specified
-                            if (desiredLength > 0 && item.length !== desiredLength) return false;
-                            
-                            // Check if word can be made from tiles
-                            if (tiles.length > 0) {
-                                const tileCopy = [...tiles];
-                                for (let letter of item.word) {
-                                    const index = tileCopy.indexOf(letter);
-                                    if (index === -1) {
-                                        // Check for blank tile
-                                        const blankIndex = tileCopy.indexOf('?');
-                                        if (blankIndex === -1) return false;
-                                        tileCopy.splice(blankIndex, 1);
-                                    } else {
-                                        tileCopy.splice(index, 1);
-                                    }
-                                }
-                            }
-                            
-                            // Check start/end letters
-                            if (startCheck.checked && startInput.value) {
-                                if (!item.word.startsWith(startInput.value.toUpperCase())) return false;
-                            }
-                            if (endCheck.checked && endInput.value) {
-                                if (!item.word.endsWith(endInput.value.toUpperCase())) return false;
-                            }
-                            
-                            return true;
-                        });
-                        
-                        // Sort by points for Scrabble
-                        results = results.sort((a, b) => b.points - a.points);
-                        displayWords(results);
-                    }
-                    
-                    // Add listeners
-                    [tilesInput, startInput, endInput].forEach(input => {
-                        input.addEventListener('input', function() {
-                            setTimeout(scrabbleSearch, 300);
-                        });
-                    });
-                    lengthSelect.addEventListener('change', scrabbleSearch);
-                    [startCheck, endCheck].forEach(check => {
-                        check.addEventListener('change', scrabbleSearch);
-                    });
-                    
-                    scrabbleSearch();
-                });
-                
-                // Crossword mode - pattern matching
-                crosswordBtn.addEventListener('click', function() {
-                    searchTitle.innerHTML = '✏️ Crossword Solver';
-                    searchSentence.innerHTML = 'Enter your crossword pattern:';
-                    filterIntro.style.display = 'none';
-                    
-                    filterPills.innerHTML = `
-                        <div class="filter-pill" style="width: 100%;">
-                            <label class="pill-label" style="display: block;">
-                                Pattern (use ? for unknown letters):
-                                <input type="text" class="pill-input" style="width: 300px; font-family: monospace; font-size: 18px; letter-spacing: 3px;" placeholder="?R?S?" id="crosswordPattern" autofocus>
-                                <small style="display: block; color: #718096; margin-top: 5px;">Example: ?R?S? finds BRASS, CROSS, DRESS, etc.</small>
-                            </label>
-                        </div>
-                        <div class="filter-pill" style="width: 100%;">
-                            <label class="pill-label" style="display: block;">
-                                Clue keyword (optional):
-                                <input type="text" class="pill-input" style="width: 200px;" placeholder="e.g., 'clothing' for DRESS" id="clueHint">
-                                <small style="display: block; color: #718096; margin-top: 5px;">Coming soon: AI-powered clue matching!</small>
-                            </label>
-                        </div>
-                    `;
-                    
-                    const patternInput = document.getElementById('crosswordPattern');
-                    
-                    function crosswordSearch() {
-                        const pattern = patternInput.value.toUpperCase();
-                        if (!pattern) {
-                            displayWords([]);
-                            return;
-                        }
-                        
-                        const length = pattern.length;
-                        
-                        let results = wordDatabase.filter(item => {
-                            if (item.length !== length) return false;
-                            
-                            // Check pattern match
-                            for (let i = 0; i < pattern.length; i++) {
-                                if (pattern[i] !== '?' && pattern[i] !== item.word[i]) {
-                                    return false;
-                                }
-                            }
-                            return true;
-                        });
-                        
-                        displayWords(sortWords(results, 'alpha'));
-                    }
-                    
-                    patternInput.addEventListener('input', function() {
-                        setTimeout(crosswordSearch, 300);
-                    });
-                    
-                    crosswordSearch();
-                });
-            }
-            
-            // Set up sort buttons
-            function setupSorting() {
-                sortButtons.forEach(button => {
-                    button.addEventListener('click', function() {
-                        // Update active button
-                        sortButtons.forEach(btn => btn.classList.remove('active'));
-                        this.classList.add('active');
-                        
-                        // Update sort and refresh
-                        currentSort = this.dataset.sort;
-                        searchWords();
-                    });
-                });
-            }
-            
-            // Set up instant search on all inputs
-            function setupInstantSearch() {
-                // Search when word length changes
-                wordLengthSelect.addEventListener('change', searchWords);
-                
-                // Search as user types (with small delay for performance)
-                let searchTimeout;
-                const instantSearchInputs = [containingInput, startingInput, endingInput, excludingInput];
-                
-                instantSearchInputs.forEach(input => {
-                    input.addEventListener('input', function() {
-                        clearTimeout(searchTimeout);
-                        searchTimeout = setTimeout(searchWords, 300); // 300ms delay
-                    });
-                });
-            }
-            
-            // Initialize everything
-            setupGameModes();  // Set up game modes first (includes reset button)
-            setupCheckboxes();
-            setupSorting();
-            setupInstantSearch();
-            
-            // Do initial search to show 5-letter words (only if in default mode)
-            if (document.getElementById('wordLength')) {
-                searchWords();
-            }
-        });
+    }
     </script>
 </head>
 <body>
     <!-- Header -->
-    <header>
+    <header class="site-header" role="banner">
         <div class="container">
-            <h1>QuickWords ⚡</h1>
-            <p class="tagline">Your friendly word finder</p>
+            <div class="header-content">
+                <div class="logo-section">
+                    <h1 class="site-title">
+                        <a href="/" aria-label="QuickWordFinder Home">
+                            QuickWordFinder <span class="logo-emoji">⚡</span>
+                        </a>
+                    </h1>
+                    <p class="tagline">Your fastest word finder for any word game</p>
+                </div>
+                
+                <nav class="main-navigation" role="navigation" aria-label="Main Navigation">
+                    <ul class="nav-list">
+                        <li><a href="#tools" class="nav-link">Tools</a></li>
+                        <li><a href="/blog" class="nav-link">Blog</a></li>
+                        <li><a href="/about" class="nav-link">About</a></li>
+                        <li><a href="/contact" class="nav-link">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Mobile menu button -->
+                <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+                    <span class="hamburger"></span>
+                </button>
+            </div>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main>
+    <main id="main" class="main-content" role="main">
         <div class="container">
-            <!-- The Sentence-Based Search Interface -->
-            <section class="search-box">
-                <h2>Tell me what you need 👇</h2>
-                
-                <div class="sentence-builder">
-                    <!-- Primary sentence -->
-                    <p class="search-sentence">
-                        I need a 
-                        <select id="wordLength" class="inline-select auto-search">
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5" selected>5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                        </select>
-                        letter word
-                    </p>
-
-                    <!-- Playful continuation -->
-                    <p class="filter-intro">...and with that, I need it to:</p>
-
-                    <!-- All filters visible and instant -->
-                    <div class="filter-pills">
-                        <div class="filter-pill">
-                            <input type="checkbox" id="useContaining" class="pill-checkbox auto-search">
-                            <label for="useContaining" class="pill-label">
-                                contain
-                                <input type="text" id="containingLetters" class="pill-input" placeholder="A,R,E" maxlength="15">
-                            </label>
-                        </div>
-
-                        <div class="filter-pill">
-                            <input type="checkbox" id="useStarting" class="pill-checkbox auto-search">
-                            <label for="useStarting" class="pill-label">
-                                start with
-                                <input type="text" id="startingLetter" class="pill-input single-letter" placeholder="S" maxlength="1">
-                            </label>
-                        </div>
-
-                        <div class="filter-pill">
-                            <input type="checkbox" id="useEnding" class="pill-checkbox auto-search">
-                            <label for="useEnding" class="pill-label">
-                                end with
-                                <input type="text" id="endingLetter" class="pill-input single-letter" placeholder="T" maxlength="1">
-                            </label>
-                        </div>
-
-                        <div class="filter-pill">
-                            <input type="checkbox" id="useExcluding" class="pill-checkbox auto-search">
-                            <label for="useExcluding" class="pill-label">
-                                avoid
-                                <input type="text" id="excludingLetters" class="pill-input" placeholder="X,Z" maxlength="15">
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Live search indicator -->
-                    <div class="search-status">
-                        <span id="searchIndicator" class="searching-text">✨ Results update as you type</span>
-                    </div>
-                </div>
+            
+            <!-- Hero Section -->
+            <section class="hero-section" aria-labelledby="hero-title">
+                <h2 id="hero-title" class="hero-title">Find the Perfect Word in Seconds</h2>
+                <p class="hero-subtitle">Whether you're solving Wordle, playing Scrabble, or tackling crosswords - we've got you covered!</p>
             </section>
 
-            <!-- Quick Game Mode Buttons -->
-            <section class="quick-modes">
-                <p class="mode-intro">Playing a specific game?</p>
-                <div class="mode-buttons">
-                    <button class="mode-button wordle-mode" data-length="5">
-                        🟩 Wordle Mode
-                    </button>
-                    <button class="mode-button scrabble-mode">
-                        🎯 Scrabble Helper
-                    </button>
-                    <button class="mode-button crossword-mode">
-                        ✏️ Crossword Solver
-                    </button>
+            <!-- Search Interface -->
+            <section class="search-section" aria-labelledby="search-title">
+                <div class="search-box">
+                    <h2 id="search-title" class="search-title">Quick Word Finder ⚡</h2>
+                    
+                    <div class="sentence-builder">
+                        <!-- Primary sentence -->
+                        <p class="search-sentence">
+                            I need a 
+                            <select id="wordLength" class="inline-select" aria-label="Word length">
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5" selected>5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                            letter word
+                        </p>
+
+                        <!-- Filter controls (no checkboxes, auto-detection) -->
+                        <div class="filter-pills" role="group" aria-label="Word filters">
+                            <div class="filter-pill">
+                                <label for="containingLetters" class="pill-label">
+                                    containing
+                                    <input type="text" id="containingLetters" class="pill-input" placeholder="rat" maxlength="15" aria-label="Letters to contain">
+                                </label>
+                            </div>
+
+                            <div class="filter-pill">
+                                <label for="startingLetter" class="pill-label">
+                                    starting with
+                                    <input type="text" id="startingLetter" class="pill-input single-letter" placeholder="s" maxlength="1" aria-label="Starting letter">
+                                </label>
+                            </div>
+
+                            <div class="filter-pill">
+                                <label for="endingLetter" class="pill-label">
+                                    ending with
+                                    <input type="text" id="endingLetter" class="pill-input single-letter" placeholder="t" maxlength="1" aria-label="Ending letter">
+                                </label>
+                            </div>
+
+                            <div class="filter-pill">
+                                <label for="excludingLetters" class="pill-label">
+                                    and avoiding
+                                    <input type="text" id="excludingLetters" class="pill-input" placeholder="xz" maxlength="15" aria-label="Letters to exclude">
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Search status (simplified) -->
+                        <div class="search-status" role="status" aria-live="polite">
+                            <button id="resetBtn" class="reset-button" aria-label="Reset all filters">↺ Reset all</button>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <!-- Results Section -->
-            <section class="results-section" id="results">
+            <section class="results-section" aria-labelledby="results-title">
                 <div class="results-header">
-                    <h3><span id="resultCount">12</span> words match your needs</h3>
-                    <div class="sort-options">
-                        <button class="sort-pill active" data-sort="common">Popular</button>
-                        <button class="sort-pill" data-sort="alpha">A-Z</button>
-                        <button class="sort-pill" data-sort="points">Points</button>
+                    <h3 id="results-title" class="results-title">
+                        <span id="resultCount" aria-live="polite">0</span> words match your needs
+                    </h3>
+                    <div class="sort-options" role="group" aria-label="Sort options">
+                        <button class="sort-pill active" data-sort="common" aria-pressed="true">Popular</button>
+                        <button class="sort-pill" data-sort="alpha" aria-pressed="false">A-Z</button>
+                        <button class="sort-pill" data-sort="points" aria-pressed="false">Points</button>
                     </div>
                 </div>
 
-                <div class="word-grid" id="wordGrid">
-                    <!-- Example words for demo (will be dynamic later) -->
-                    <div class="word-card">
-                        <span class="word">CRANE</span>
-                        <span class="word-score">7 pts</span>
+                <div class="word-grid" id="wordGrid" role="grid" aria-label="Word results">
+                    <!-- Results will be populated by JavaScript -->
+                    <div class="loading-state" aria-hidden="true">
+                        <p>🔍 Ready to find words...</p>
                     </div>
-                    <div class="word-card">
-                        <span class="word">SLATE</span>
-                        <span class="word-score">5 pts</span>
-                    </div>
-                    <div class="word-card">
-                        <span class="word">TRACE</span>
-                        <span class="word-score">7 pts</span>
-                    </div>
-                    <div class="word-card popular">
-                        <span class="word">STARE</span>
-                        <span class="word-score">5 pts</span>
-                        <span class="word-badge">Popular</span>
-                    </div>
-                    <div class="word-card">
-                        <span class="word">AROSE</span>
-                        <span class="word-score">5 pts</span>
-                    </div>
-                    <div class="word-card">
-                        <span class="word">TEARS</span>
-                        <span class="word-score">5 pts</span>
-                    </div>
+                </div>
+            </section>
+
+            <!-- Game Mode Buttons (moved below results) -->
+            <section class="quick-modes" aria-labelledby="modes-title">
+                <h3 id="modes-title" class="modes-title">Choose your word finder mode:</h3>
+                <div class="mode-buttons" role="group" aria-label="Game modes">
+                    <button class="mode-button default-mode active" data-mode="default" aria-describedby="default-desc">
+                        ⚡ Quick Word Finder
+                    </button>
+                    <button class="mode-button wordle-mode" data-mode="wordle" aria-describedby="wordle-desc">
+                        🟩 Wordle Mode
+                    </button>
+                    <button class="mode-button scrabble-mode" data-mode="scrabble" aria-describedby="scrabble-desc">
+                        🎯 Scrabble Helper
+                    </button>
+                    <button class="mode-button crossword-mode" data-mode="crossword" aria-describedby="crossword-desc">
+                        ✏️ Crossword Solver
+                    </button>
+                </div>
+                
+                <!-- Hidden descriptions for accessibility -->
+                <div class="sr-only">
+                    <p id="default-desc">Switch to default mode for general word finding</p>
+                    <p id="wordle-desc">Switch to Wordle mode for position-based letter matching</p>
+                    <p id="scrabble-desc">Switch to Scrabble mode for tile-based word building</p>
+                    <p id="crossword-desc">Switch to Crossword mode for pattern matching</p>
                 </div>
             </section>
 
             <!-- Trust Signals -->
-            <section class="trust-signals">
-                <div class="signal-item">
-                    <span class="signal-number">170,000+</span>
-                    <span class="signal-label">Words in database</span>
-                </div>
-                <div class="signal-item">
-                    <span class="signal-number">< 1s</span>
-                    <span class="signal-label">Search time</span>
-                </div>
-                <div class="signal-item">
-                    <span class="signal-number">100%</span>
-                    <span class="signal-label">Free to use</span>
+            <section class="trust-signals" aria-labelledby="stats-title">
+                <h3 id="stats-title" class="sr-only">Site Statistics</h3>
+                <div class="signal-grid">
+                    <div class="signal-item">
+                        <span class="signal-number">170,000+</span>
+                        <span class="signal-label">Words in database</span>
+                    </div>
+                    <div class="signal-item">
+                        <span class="signal-number">&lt; 1s</span>
+                        <span class="signal-label">Search time</span>
+                    </div>
+                    <div class="signal-item">
+                        <span class="signal-number">100%</span>
+                        <span class="signal-label">Free to use</span>
+                    </div>
                 </div>
             </section>
+
         </div>
     </main>
 
     <!-- Footer -->
-    <footer>
+    <footer class="site-footer" role="contentinfo">
         <div class="container">
-            <p>&copy; 2024 QuickWords. Built for word game lovers, by word game lovers.</p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="/wordle-solver">Wordle Solver</a></li>
+                        <li><a href="/scrabble-helper">Scrabble Helper</a></li>
+                        <li><a href="/crossword-solver">Crossword Solver</a></li>
+                        <li><a href="/anagram-solver">Anagram Solver</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-title">Word Lists</h4>
+                    <ul class="footer-links">
+                        <li><a href="/5-letter-words">5 Letter Words</a></li>
+                        <li><a href="/words-starting-with">Words Starting With</a></li>
+                        <li><a href="/words-ending-with">Words Ending With</a></li>
+                        <li><a href="/words-containing">Words Containing</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-title">Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="/blog">Word Game Blog</a></li>
+                        <li><a href="/word-game-tips">Tips & Strategies</a></li>
+                        <li><a href="/word-lists">Downloadable Lists</a></li>
+                        <li><a href="/api">Developer API</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-title">Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/terms">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 QuickWordFinder. Built for word game lovers, by word game lovers.</p>
+                <p class="footer-tagline">Find your perfect word in seconds ⚡</p>
+            </div>
         </div>
     </footer>
+
+    <!-- JavaScript -->
+    <script src="src/js/main.js"></script>
+    
+    <!-- Google Analytics (add your tracking ID) -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=GA_TRACKING_ID"></script> -->
+    <!-- <script src="src/js/analytics.js"></script> -->
 </body>
 </html>

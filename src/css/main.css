@@ -1,0 +1,1193 @@
+/* ==========================================================================
+QuickWordFinder - Main Stylesheet with Unified Active States
+========================================================================== */
+
+/* CSS Reset and Base Styles
+========================================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+    
+    *::before,
+    *::after {
+    box-sizing: border-box;
+    }
+    
+    html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    }
+    
+    body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #2d3748;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    }
+    
+    /* Screen Reader Only Content
+    ========================================================================== */
+    
+    .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+    }
+    
+    /* Layout and Container
+    ========================================================================== */
+    
+    .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    }
+    
+    /* Header Styles
+    ========================================================================== */
+    
+    .site-header {
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    padding: 20px 0;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 100;
+    }
+    
+    .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    }
+    
+    .logo-section {
+    flex: 1;
+    }
+    
+    .site-title {
+    font-size: clamp(24px, 4vw, 32px);
+    font-weight: 800;
+    margin-bottom: 4px;
+    }
+    
+    .site-title a {
+    color: #667eea;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    }
+    
+    .site-title a:hover {
+    color: #5a67d8;
+    }
+    
+    .logo-emoji {
+    font-size: 0.9em;
+    }
+    
+    .tagline {
+    color: #718096;
+    font-size: 14px;
+    font-weight: 500;
+    }
+    
+    /* Navigation
+    ========================================================================== */
+    
+    .main-navigation {
+    display: flex;
+    align-items: center;
+    }
+    
+    .nav-list {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+    }
+    
+    .nav-link {
+    color: #4a5568;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    }
+    
+    .nav-link:hover,
+    .nav-link:focus {
+    background: #f7fafc;
+    color: #667eea;
+    }
+    
+    /* Mobile Menu Button */
+    .mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+    }
+    
+    .hamburger {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #4a5568;
+    position: relative;
+    }
+    
+    .hamburger::before,
+    .hamburger::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background: #4a5568;
+    transition: all 0.3s ease;
+    }
+    
+    .hamburger::before {
+    top: -8px;
+    }
+    
+    .hamburger::after {
+    bottom: -8px;
+    }
+    
+    /* Main Content Layout
+    ========================================================================== */
+    
+    .main-content {
+    padding: 30px 0 50px;
+    }
+    
+    /* Hero Section
+    ========================================================================== */
+    
+    .hero-section {
+    text-align: center;
+    margin-bottom: 25px;
+    }
+    
+    .hero-title {
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 800;
+    color: white;
+    margin-bottom: 16px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .hero-subtitle {
+    font-size: clamp(16px, 3vw, 20px);
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 600px;
+    margin: 0 auto;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Search Section
+    ========================================================================== */
+    
+    .search-section {
+    margin-bottom: 15px;
+    }
+    
+    .search-box {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    }
+    
+    .search-title {
+    font-size: 24px;
+    color: #2d3748;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 700;
+    }
+    
+    /* Sentence Builder
+    ========================================================================== */
+    
+    .sentence-builder {
+    max-width: 100%;
+    }
+    
+    .search-sentence {
+    font-size: clamp(18px, 4vw, 22px);
+    color: #2d3748;
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 500;
+    }
+    
+    .inline-select {
+    background: #f7fafc;
+    border: 2px solid #667eea;
+    border-radius: 8px;
+    padding: 5px 15px;
+    font-size: inherit;
+    font-weight: bold;
+    color: #667eea;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 60px;
+    }
+    
+    .inline-select:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-1px);
+    }
+    
+    .inline-select:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+    }
+    
+    /* Filter Pills - UPDATED for Unified Active States
+    ========================================================================== */
+    
+    .filter-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 20px;
+    }
+    
+    .filter-pill {
+    background: #f7fafc;
+    border-radius: 25px;
+    transition: all 0.3s ease, filter 0.2s ease, transform 0.2s ease; /* Enhanced transitions */
+    border: 2px solid transparent;
+    overflow: hidden;
+    flex: 1;
+    min-width: 200px;
+    }
+    
+    .pill-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 12px 20px;
+    font-weight: 500;
+    color: #4a5568;
+    transition: all 0.3s ease;
+    justify-content: space-between;
+    }
+    
+    /* Hover effect - only when NOT active */
+    .filter-pill:not(.active) .pill-label:hover {
+    background: #edf2f7;
+    }
+    
+    .pill-input {
+    border: none;
+    background: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    min-width: 80px;
+    flex-shrink: 0;
+    }
+
+        /* Lighter placeholder text for better contrast with typed text */
+.pill-input::placeholder {
+    color: #b6c2d1; /* Lighter gray */
+    opacity: 1; /* Ensure consistent opacity across browsers */
+}
+
+/* For Firefox compatibility */
+.pill-input::-moz-placeholder {
+    color: #b6c2d1;
+    opacity: 1;
+}
+
+/* For WebKit browsers (Chrome, Safari) */
+.pill-input::-webkit-input-placeholder {
+    color: #b6c2d1;
+}
+
+/* For Microsoft Edge */
+.pill-input::-ms-input-placeholder {
+    color: #b6c2d1;
+}
+    
+    .pill-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.5);
+    background: #fff;
+    }
+    
+    .pill-input.single-letter {
+    text-align: center;
+    min-width: 80px;
+    max-width: 80px;
+    text-transform: uppercase;
+    }
+    
+    /* UNIFIED ACTIVE STATES - Works for all modes
+    ========================================================================== */
+    
+    /* Default active state for all modes except Wordle */
+    .filter-pill.active {
+    background: #667eea !important; /* Important to override hover */
+    border-color: #667eea;
+    transition: all 0.3s ease, filter 0.2s ease, transform 0.2s ease; /* Smooth transitions */
+    }
+    
+    .filter-pill.active .pill-label {
+    color: white;
+    background: transparent; /* Ensure no background override */
+    }
+    
+    .filter-pill.active .pill-label:hover {
+    background: transparent; /* Prevent hover when active */
+    }
+    
+    .filter-pill.active .pill-label small {
+    color: white !important; /* Make descriptive text white */
+    }
+    
+    .filter-pill.active .pill-input {
+    background: white;
+    color: #2d3748;
+    }
+    
+    /* Subtle hover effect for active pills */
+    .filter-pill.active:hover {
+    filter: brightness(1.1); /* Slightly brighter */
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3); /* Purple glow */
+    transform: translateY(-1px); /* Tiny lift */
+    }
+    
+    /* WORDLE MODE SPECIFIC ACTIVE STATES
+    ========================================================================== */
+    
+    /* Green letters pill in Wordle mode */
+    .filter-pill.active.wordle-green {
+    background: #48bb78 !important; /* Green background - override hover */
+    border-color: #38a169;
+    transition: all 0.3s ease, filter 0.2s ease, transform 0.2s ease; /* Smooth transitions */
+    }
+    
+    .filter-pill.active.wordle-green .pill-label {
+    color: white;
+    background: transparent; /* Ensure no background override */
+    }
+    
+    .filter-pill.active.wordle-green .pill-label:hover {
+    background: transparent; /* Prevent hover when active */
+    }
+    
+    .filter-pill.active.wordle-green .pill-label small {
+    color: white !important; /* Make descriptive text white */
+    }
+    
+    .filter-pill.active.wordle-green .pill-input {
+    background: white;
+    color: #2d3748;
+    }
+    
+    /* Subtle hover effect for green pills */
+    .filter-pill.active.wordle-green:hover {
+    filter: brightness(1.1); /* Slightly brighter */
+    box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3); /* Green glow */
+    transform: translateY(-1px); /* Tiny lift */
+    }
+    
+    /* Yellow letters pill in Wordle mode */
+    .filter-pill.active.wordle-yellow {
+    background: #EDB934 !important; /* Orange/Yellow background - override hover */
+    border-color: #dda820;
+    transition: all 0.3s ease, filter 0.2s ease, transform 0.2s ease; /* Smooth transitions */
+    }
+    
+    .filter-pill.active.wordle-yellow .pill-label {
+    color: white;
+    background: transparent; /* Ensure no background override */
+    }
+    
+    .filter-pill.active.wordle-yellow .pill-label:hover {
+    background: transparent; /* Prevent hover when active */
+    }
+    
+    .filter-pill.active.wordle-yellow .pill-label small {
+    color: white !important; /* Make descriptive text white */
+    }
+    
+    .filter-pill.active.wordle-yellow .pill-input {
+    background: white;
+    color: #2d3748;
+    }
+    
+    /* Subtle hover effect for yellow pills */
+    .filter-pill.active.wordle-yellow:hover {
+    filter: brightness(1.1); /* Slightly brighter */
+    box-shadow: 0 4px 12px rgba(237, 137, 54, 0.3); /* Orange glow */
+    transform: translateY(-1px); /* Tiny lift */
+    }
+    
+    /* Gray letters pill in Wordle mode */
+    .filter-pill.active.wordle-gray {
+    background: #4a5568 !important; /* Dark gray background - override hover */
+    border-color: #2d3748;
+    transition: all 0.3s ease, filter 0.2s ease, transform 0.2s ease; /* Smooth transitions */
+    }
+    
+    .filter-pill.active.wordle-gray .pill-label {
+    color: white;
+    background: transparent; /* Ensure no background override */
+    }
+    
+    .filter-pill.active.wordle-gray .pill-label:hover {
+    background: transparent; /* Prevent hover when active */
+    }
+    
+    .filter-pill.active.wordle-gray .pill-label small {
+    color: white !important; /* Make descriptive text white */
+    }
+    
+    .filter-pill.active.wordle-gray .pill-input {
+    background: white;
+    color: #2d3748;
+    }
+    
+    /* Subtle hover effect for gray pills */
+    .filter-pill.active.wordle-gray:hover {
+    filter: brightness(1.2); /* Slightly more brightness for dark background */
+    box-shadow: 0 4px 12px rgba(74, 85, 104, 0.3); /* Gray glow */
+    transform: translateY(-1px); /* Tiny lift */
+    }
+    
+    /* Ensure strong contrast for Wordle semantic colors in inactive state */
+    .wordle-mode .pill-label .wordle-green-text {
+    color: #22543d; /* Darker green for contrast */
+    font-weight: bold;
+    }
+    
+    .wordle-mode .pill-label .wordle-yellow-text {
+    color: #c05621; /* Darker orange for contrast */
+    font-weight: bold;
+    }
+    
+    .wordle-mode .pill-label .wordle-gray-text {
+    color: #2d3748; /* Dark gray for contrast */
+    font-weight: bold;
+    }
+    
+    /* Search Status
+    ========================================================================== */
+    
+    .search-status {
+    text-align: center;
+    margin-top: 20px;
+    }
+    
+    .reset-button {
+    background: #e2e8f0;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #4a5568;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    }
+    
+    .reset-button:hover {
+    background: #cbd5e0;
+    transform: translateY(-1px);
+    }
+    
+    .reset-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+    }
+    
+    /* Results Section
+    ========================================================================== */
+    
+    .results-section {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    min-height: 400px;
+    }
+    
+    .results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+    }
+    
+    .results-title {
+    color: #2d3748;
+    font-size: 20px;
+    font-weight: 600;
+    }
+    
+    .results-title span {
+    color: #667eea;
+    font-weight: bold;
+    }
+    
+    /* Sort Options
+    ========================================================================== */
+    
+    .sort-options {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    }
+    
+    .sort-pill {
+    background: #f7fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #4a5568;
+    font-weight: 500;
+    }
+    
+    .sort-pill:hover {
+    background: #edf2f7;
+    transform: translateY(-1px);
+    }
+    
+    .sort-pill.active {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+    }
+    
+    .sort-pill:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+    }
+    
+    /* Word Grid
+    ========================================================================== */
+    
+    .word-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+    }
+    
+    .word-card {
+    background: #f7fafc;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    position: relative;
+    cursor: pointer;
+    }
+    
+    .word-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-color: #667eea;
+    }
+    
+    .word {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    color: #2d3748;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    font-family: 'Courier New', monospace;
+    }
+    
+    .word-card .word:last-child {
+    margin-bottom: 0;
+    }
+    
+    .word-score {
+    display: block;
+    font-size: 12px;
+    color: #718096;
+    font-weight: 500;
+    }
+    
+    .word-card.popular {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border-color: #667eea;
+    }
+    
+    .word-card.popular .word,
+    .word-card.popular .word-score {
+    color: white;
+    }
+    
+    .word-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #48bb78;
+    color: white;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    }
+    
+    /* Selected word card state */
+    .word-card.selected {
+    background: #4c51bf;
+    color: white;
+    border-color: #4c51bf;
+    transform: translateY(-3px);
+    }
+    
+    .word-card.selected .word,
+    .word-card.selected .word-score {
+    color: white;
+    }
+    
+    /* Loading State */
+    .loading-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px 20px;
+    color: #718096;
+    font-style: italic;
+    }
+    
+    .loading-state p {
+    font-size: 18px;
+    }
+    
+    /* Game Mode Buttons
+    ========================================================================== */
+    
+    .quick-modes {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    }
+    
+    .modes-title {
+    text-align: center;
+    color: #4a5568;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: 600;
+    }
+    
+    .mode-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    }
+    
+    .mode-button.default-mode.active {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+    }
+    
+    .mode-button {
+    background: #f7fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 14px 24px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    color: #4a5568;
+    }
+    
+    .mode-button:hover {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    }
+    
+    .mode-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+    }
+    
+    .mode-button.active {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+    }
+    
+    /* Trust Signals
+    ========================================================================== */
+    
+    .trust-signals {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 15px;
+    }
+    
+    .signal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    text-align: center;
+    }
+    
+    .signal-item {
+    padding: 10px;
+    }
+    
+    .signal-number {
+    display: block;
+    font-size: clamp(24px, 4vw, 32px);
+    font-weight: bold;
+    color: #667eea;
+    margin-bottom: 8px;
+    }
+    
+    .signal-label {
+    display: block;
+    font-size: 14px;
+    color: #718096;
+    font-weight: 500;
+    }
+    
+    /* Footer
+    ========================================================================== */
+    
+    .site-footer {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 40px 0 20px;
+    margin-top: 50px;
+    }
+    
+    .footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+    }
+    
+    .footer-section {
+    text-align: left;
+    }
+    
+    .footer-title {
+    color: #2d3748;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    }
+    
+    .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    }
+    
+    .footer-links li {
+    margin-bottom: 8px;
+    }
+    
+    .footer-links a {
+    color: #718096;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+    color: #667eea;
+    }
+    
+    .footer-bottom {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 20px;
+    text-align: center;
+    color: #718096;
+    font-size: 14px;
+    }
+    
+    .footer-tagline {
+    margin-top: 8px;
+    font-weight: 500;
+    color: #4a5568;
+    }
+    
+    /* Mobile Responsive Styles
+    ========================================================================== */
+    
+    @media (max-width: 767px) {
+    .main-content .container {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .search-section {
+        position: relative;
+        order: 1;
+    }
+    
+    .results-section {
+        order: 2;
+    }
+    
+    .quick-modes {
+        order: 3;
+    }
+    
+    .hero-section {
+        order: 4;
+        margin: 30px 0;
+    }
+    
+    .trust-signals {
+        order: 5;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .main-navigation {
+        display: none;
+    }
+    
+    .mobile-menu-toggle {
+        display: block;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+    
+    .main-content {
+        padding: 15px 0 20px;
+    }
+    
+    .hero-section {
+        margin: 15px 0;
+    }
+    
+    .search-box {
+        padding: 20px;
+        margin-bottom: 10px;
+    }
+    
+    .search-title {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+    
+    .filter-pills {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    
+    .filter-pill {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    .pill-label {
+        justify-content: space-between;
+        padding: 10px 16px;
+    }
+    
+    .pill-input {
+        min-width: 100px;
+    }
+    
+    .pill-input.single-letter {
+        min-width: 100px;
+        max-width: 100px;
+    }
+    
+    .word-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 10px;
+    }
+    
+    .word-card {
+        padding: 12px 8px;
+    }
+    
+    .word {
+        font-size: 16px;
+        letter-spacing: 0.5px;
+        margin-bottom: 4px;
+    }
+    
+    .word-score {
+        font-size: 11px;
+    }
+    
+    .results-section {
+        padding: 20px;
+        margin-bottom: 10px;
+    }
+    
+    .results-header {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .sort-options {
+        justify-content: center;
+    }
+    
+    .quick-modes {
+        padding: 20px;
+        margin-bottom: 10px;
+    }
+    
+    .modes-title {
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+    
+    .mode-buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+    
+    .mode-button {
+        width: 100%;
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+    
+    .trust-signals {
+        padding: 20px;
+        margin-bottom: 10px;
+    }
+    
+    .signal-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+    
+    .signal-number {
+        font-size: 20px;
+    }
+    
+    .signal-label {
+        font-size: 12px;
+    }
+    
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .footer-section {
+        text-align: center;
+    }
+    }
+    
+    /* Tablet specific adjustments */
+    @media (min-width: 768px) and (max-width: 1024px) {
+    .word-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+    
+    .search-box {
+        padding: 25px;
+    }
+    }
+    
+    /* Desktop specific: Split layout implementation */
+    @media (min-width: 768px) {
+        .main-content .container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+    
+        .main-content .container {
+            grid-template-columns: 350px 1fr;
+            grid-template-areas: 
+                "hero hero"
+                "search results"
+                "search modes"
+                "trust trust";
+            gap: 40px;
+            align-items: start;
+        }
+    
+        .hero-section {
+            grid-area: hero;
+            margin-bottom: 0;
+        }
+    
+        .search-section {
+            grid-area: search;
+            position: relative;
+        }
+    
+        .results-section {
+            grid-area: results;
+            min-height: 400px;
+        }
+    
+        .quick-modes {
+            grid-area: modes;
+        }
+    
+        .trust-signals {
+            grid-area: trust;
+        }
+    }
+    
+    /* Large desktop adjustments */
+    @media (min-width: 1200px) {
+    .main-content .container {
+        grid-template-columns: 400px 1fr;
+        gap: 50px;
+    }
+    
+    .word-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+    }
+    
+    /* Animations and Transitions
+    ========================================================================== */
+    
+    @keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    }
+    
+    @keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    }
+    
+    @keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    }
+    
+    @keyframes slideOutRight {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    }
+    
+    .word-card {
+    animation: fadeIn 0.3s ease-out;
+    }
+    
+    .filter-pill.active {
+    animation: slideIn 0.3s ease-out;
+    }
+    
+    /* Focus styles for accessibility */
+    button:focus,
+    input:focus,
+    select:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+    }
+    
+    /* High contrast mode support */
+    @media (prefers-contrast: high) {
+    .word-card {
+        border: 2px solid #000;
+    }
+    
+    .sort-pill.active,
+    .mode-button:hover {
+        background: #000;
+        color: #fff;
+    }
+    }
+    
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    }
