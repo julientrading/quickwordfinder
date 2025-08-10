@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Essential Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>QuickWordFinder - Fast Word Finder for Wordle, Scrabble & Crosswords</title>
+    <meta name="description" content="Find words instantly for Wordle, Scrabble, and crossword puzzles. Advanced search with pattern matching, letter positions, and game-specific tools.">
+    <meta name="keywords" content="word finder, wordle solver, scrabble helper, crossword solver, word games, anagram">
+    <meta name="author" content="QuickWordFinder">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="QuickWordFinder - Fast Word Finder for Word Games">
+    <meta property="og:description" content="Find words instantly for Wordle, Scrabble, and crossword puzzles with our advanced search tools.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://quickwordfinder.com">
+    <meta property="og:site_name" content="QuickWordFinder">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="QuickWordFinder - Fast Word Finder">
+    <meta name="twitter:description" content="Find words instantly for Wordle, Scrabble, and crossword puzzles.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://quickwordfinder.com">
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="src/css/main.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "QuickWordFinder",
+        "description": "Fast word finder for Wordle, Scrabble, and crossword puzzles",
+        "url": "https://quickwordfinder.com",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "QuickWordFinder"
+        }
+    }
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header" role="banner">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <h1 class="site-title">
+                        <a href="/" aria-label="QuickWordFinder Home">
+                            QuickWordFinder <span class="logo-emoji">⚡</span>
+                        </a>
+                    </h1>
+                    <p class="tagline">Your fastest word finder for any word game</p>
+                </div>
+                
+                <nav class="main-navigation" role="navigation" aria-label="Main Navigation">
+                    <ul class="nav-list">
+                        <li><a href="#tools" class="nav-link">Tools</a></li>
+                        <li><a href="/blog" class="nav-link">Blog</a></li>
+                        <li><a href="/about" class="nav-link">About</a></li>
+                        <li><a href="/contact" class="nav-link">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Mobile menu button -->
+                <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+                    <span class="hamburger"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main" class="main-content" role="main">
+        <div class="container">
+            
+            <!-- Hero Section -->
+            <section class="hero-section" aria-labelledby="hero-title">
+                <h2 id="hero-title" class="hero-title">Find the Perfect Word in Seconds</h2>
+                <p class="hero-subtitle">Whether you're solving Wordle, playing Scrabble, or tackling crosswords - we've got you covered!</p>
+            </section>
+
+            <!-- Search Interface -->
+            <section class="search-section" aria-labelledby="search-title">
+                <div class="search-box">
+                    <h2 id="search-title" class="search-title">Quick Word Finder ⚡</h2>
+                    
+                    <div class="sentence-builder">
+                        <!-- Primary sentence -->
+                        <p class="search-sentence">
+                            I need a 
+                            <select id="wordLength" class="inline-select" aria-label="Word length">
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5" selected>5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                            letter word
+                        </p>
+
+                        <!-- Filter controls (no checkboxes, auto-detection) -->
+                        <div class="filter-pills" role="group" aria-label="Word filters">
+                            <div class="filter-pill">
+                                <label for="containingLetters" class="pill-label">
+                                    containing
+                                    <input type="text" id="containingLetters" class="pill-input" placeholder="rat" maxlength="15" aria-label="Letters to contain">
+                                </label>
+                            </div>
+
+                            <div class="filter-pill">
+                                <label for="startingLetter" class="pill-label">
+                                    starting with
+                                    <input type="text" id="startingLetter" class="pill-input single-letter" placeholder="s" maxlength="1" aria-label="Starting letter">
+                                </label>
+                            </div>
+
+                            <div class="filter-pill">
+                                <label for="endingLetter" class="pill-label">
+                                    ending with
+                                    <input type="text" id="endingLetter" class="pill-input single-letter" placeholder="t" maxlength="1" aria-label="Ending letter">
+                                </label>
+                            </div>
+
+                            <div class="filter-pill">
+                                <label for="excludingLetters" class="pill-label">
+                                    and avoiding
+                                    <input type="text" id="excludingLetters" class="pill-input" placeholder="xz" maxlength="15" aria-label="Letters to exclude">
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Search status (simplified) -->
+                        <div class="search-status" role="status" aria-live="polite">
+                            <button id="resetBtn" class="reset-button" aria-label="Reset all filters">↺ Reset all</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section" aria-labelledby="results-title">
+                <div class="results-header">
+                    <h3 id="results-title" class="results-title">
+                        <span id="resultCount" aria-live="polite">0</span> words match your needs
+                    </h3>
+                    <div class="sort-options" role="group" aria-label="Sort options">
+                        <button class="sort-pill active" data-sort="common" aria-pressed="true">Popular</button>
+                        <button class="sort-pill" data-sort="alpha" aria-pressed="false">A-Z</button>
+                        <button class="sort-pill" data-sort="points" aria-pressed="false">Points</button>
+                    </div>
+                </div>
+
+                <div class="word-grid" id="wordGrid" role="grid" aria-label="Word results">
+                    <!-- Results will be populated by JavaScript -->
+                    <div class="loading-state" aria-hidden="true">
+                        <p>🔍 Ready to find words...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Game Mode Buttons (moved below results) -->
+            <section class="quick-modes" aria-labelledby="modes-title">
+                <h3 id="modes-title" class="modes-title">Choose your word finder mode:</h3>
+                <div class="mode-buttons" role="group" aria-label="Game modes">
+                    <button class="mode-button default-mode active" data-mode="default" aria-describedby="default-desc">
+                        ⚡ Quick Word Finder
+                    </button>
+                    <button class="mode-button wordle-mode" data-mode="wordle" aria-describedby="wordle-desc">
+                        🟩 Wordle Mode
+                    </button>
+                    <button class="mode-button scrabble-mode" data-mode="scrabble" aria-describedby="scrabble-desc">
+                        🎯 Scrabble Helper
+                    </button>
+                    <button class="mode-button crossword-mode" data-mode="crossword" aria-describedby="crossword-desc">
+                        ✏️ Crossword Solver
+                    </button>
+                </div>
+                
+                <!-- Hidden descriptions for accessibility -->
+                <div class="sr-only">
+                    <p id="default-desc">Switch to default mode for general word finding</p>
+                    <p id="wordle-desc">Switch to Wordle mode for position-based letter matching</p>
+                    <p id="scrabble-desc">Switch to Scrabble mode for tile-based word building</p>
+                    <p id="crossword-desc">Switch to Crossword mode for pattern matching</p>
+                </div>
+            </section>
+
+            <!-- Trust Signals -->
+            <section class="trust-signals" aria-labelledby="stats-title">
+                <h3 id="stats-title" class="sr-only">Site Statistics</h3>
+                <div class="signal-grid">
+                    <div class="signal-item">
+                        <span class="signal-number">170,000+</span>
+                        <span class="signal-label">Words in database</span>
+                    </div>
+                    <div class="signal-item">
+                        <span class="signal-number">&lt; 1s</span>
+                        <span class="signal-label">Search time</span>
+                    </div>
+                    <div class="signal-item">
+                        <span class="signal-number">100%</span>
+                        <span class="signal-label">Free to use</span>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="/wordle-solver">Wordle Solver</a></li>
+                        <li><a href="/scrabble-helper">Scrabble Helper</a></li>
+                        <li><a href="/crossword-solver">Crossword Solver</a></li>
+                        <li><a href="/anagram-solver">Anagram Solver</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-title">Word Lists</h4>
+                    <ul class="footer-links">
+                        <li><a href="/5-letter-words">5 Letter Words</a></li>
+                        <li><a href="/words-starting-with">Words Starting With</a></li>
+                        <li><a href="/words-ending-with">Words Ending With</a></li>
+                        <li><a href="/words-containing">Words Containing</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-title">Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="/blog">Word Game Blog</a></li>
+                        <li><a href="/word-game-tips">Tips & Strategies</a></li>
+                        <li><a href="/word-lists">Downloadable Lists</a></li>
+                        <li><a href="/api">Developer API</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-title">Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/terms">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 QuickWordFinder. Built for word game lovers, by word game lovers.</p>
+                <p class="footer-tagline">Find your perfect word in seconds ⚡</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="src/js/main.js"></script>
+    
+    <!-- Google Analytics (add your tracking ID) -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=GA_TRACKING_ID"></script> -->
+    <!-- <script src="src/js/analytics.js"></script> -->
+</body>
+</html>
