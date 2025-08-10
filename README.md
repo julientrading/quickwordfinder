@@ -65,7 +65,7 @@ quickwordfinder/
 ### Installation
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/[YOUR_USERNAME]/quickwordfinder.git
+   git clone https://github.com/julientrading/quickwordfinder.git
    cd quickwordfinder
    ```
 
