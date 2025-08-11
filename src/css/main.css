@@ -1052,60 +1052,55 @@ QuickWordFinder - Main Stylesheet with Unified Active States
     }
     }
     
-    /* Desktop specific: Split layout implementation */
-    @media (min-width: 768px) {
-        .main-content .container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-        }
-    
-        .main-content .container {
-            grid-template-columns: 350px 1fr;
-            grid-template-areas: 
-                "hero hero"
-                "search results"
-                "search modes"
-                "trust trust";
-            gap: 40px;
-            align-items: start;
-        }
-    
-        .hero-section {
-            grid-area: hero;
-            margin-bottom: 0;
-        }
-    
-        .search-section {
-            grid-area: search;
-            position: relative;
-        }
-    
-        .results-section {
-            grid-area: results;
-            min-height: 400px;
-        }
-    
-        .quick-modes {
-            grid-area: modes;
-        }
-    
-        .trust-signals {
-            grid-area: trust;
-        }
+
+    /* Desktop specific: Split layout implementation - HOMEPAGE ONLY */
+@media (min-width: 768px) {
+    .homepage .main-content .container {
+        display: grid;
+        grid-template-columns: 350px 1fr;
+        grid-template-areas: 
+            "hero hero"
+            "search results"
+            "modes results"
+            "trust trust";
+        gap: 40px;
+        align-items: start;
     }
-    
-    /* Large desktop adjustments */
-    @media (min-width: 1200px) {
-    .main-content .container {
+
+    .homepage .hero-section {
+        grid-area: hero;
+        margin-bottom: 0;
+    }
+
+    .homepage .search-section {
+        grid-area: search;
+        position: relative;
+        margin-bottom: 20px; /* Closer spacing to modes for better UX */
+    }
+
+    .homepage .results-section {
+        grid-area: results;
+        min-height: 400px;
+    }
+
+    .homepage .quick-modes {
+        grid-area: modes;
+        margin-top: 0; /* Remove top margin since search has bottom margin */
+    }
+
+    .homepage .trust-signals {
+        grid-area: trust;
+    }
+}
+
+/* Large desktop adjustments - HOMEPAGE ONLY */
+@media (min-width: 1200px) {
+    .homepage .main-content .container {
         grid-template-columns: 400px 1fr;
         gap: 50px;
     }
-    
-    .word-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    }
-    }
+}
+
     
     /* Animations and Transitions
     ========================================================================== */

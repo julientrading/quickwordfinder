@@ -33,7 +33,7 @@
         { word: 'MARE', length: 4, points: 6, common: false },
         { word: 'BARE', length: 4, points: 6, common: false },
         
-        // 5 letter words (great for Wordle)
+        // 5 letter words (Only BEST Wordle starters marked as wordle: true)
         { word: 'CRANE', length: 5, points: 7, common: true },
         { word: 'SLATE', length: 5, points: 5, common: true },
         { word: 'TRACE', length: 5, points: 7, common: false },
@@ -54,6 +54,11 @@
         { word: 'SPARE', length: 5, points: 7, common: true },
         { word: 'SCARE', length: 5, points: 7, common: false },
         { word: 'SCORE', length: 5, points: 7, common: true },
+        { word: 'SHORE', length: 5, points: 8, common: true },
+        { word: 'SNORE', length: 5, points: 5, common: false },
+        { word: 'STORE', length: 5, points: 5, common: true },
+        { word: 'SWORE', length: 5, points: 8, common: false },
+        { word: 'ADORE', length: 5, points: 6, common: true },
         
         // 6 letter words
         { word: 'FRIEND', length: 6, points: 10, common: true },

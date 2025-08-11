@@ -1,0 +1,704 @@
+/* ==========================================================================
+   SEO Pages Specific Styles - QuickWordFinder (Updated Layout)
+   ========================================================================== */
+
+/* Breadcrumb Navigation
+   ========================================================================== */
+
+   .breadcrumb-nav {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 12px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.breadcrumb {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.breadcrumb li {
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb li:not(:last-child)::after {
+    content: '›';
+    margin-left: 8px;
+    color: #718096;
+    font-weight: bold;
+}
+
+.breadcrumb a {
+    color: #667eea;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.breadcrumb a:hover {
+    color: #5a67d8;
+    text-decoration: underline;
+}
+
+.breadcrumb .current {
+    color: #4a5568;
+    font-weight: 500;
+}
+
+/* SEO Page Layout - Override Homepage Grid
+   ========================================================================== */
+
+.seo-page .main-content {
+    padding: 20px 0 50px;
+}
+
+/* Override the homepage grid layout for SEO pages - STRONG OVERRIDES */
+.seo-page .main-content .container {
+    display: flex !important; /* Use flexbox instead of grid */
+    flex-direction: column !important; /* Stack vertically */
+    grid-template-columns: none !important;
+    grid-template-areas: none !important;
+    gap: 0 !important;
+    align-items: stretch !important;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Ensure all SEO page sections stack vertically and are visible */
+.seo-page .seo-hero,
+.seo-page .quick-search-section,
+.seo-page .words-section,
+.seo-page .related-links,
+.seo-page .faq-section {
+    grid-area: none !important; /* Remove any grid area assignments */
+    width: 100%;
+    max-width: none !important;
+    order: initial !important; /* Ensure natural document order */
+    display: block !important; /* Make sure they're visible */
+    position: relative !important; /* Reset any absolute positioning */
+}
+
+/* Set specific order to ensure correct stacking */
+.seo-page .seo-hero {
+    order: 1;
+}
+
+.seo-page .quick-search-section {
+    order: 2;
+}
+
+.seo-page .words-section {
+    order: 3;
+}
+
+.seo-page .related-links {
+    order: 4;
+}
+
+.seo-page .faq-section {
+    order: 5;
+}
+
+.seo-hero {
+    text-align: center;
+    margin-bottom: 12px; /* Reduced from 40px by 70% */
+    padding: 30px 20px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.seo-title {
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 800;
+    color: #2d3748;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.seo-subtitle {
+    font-size: clamp(16px, 3vw, 18px);
+    color: #4a5568;
+    max-width: 800px;
+    margin: 0 auto 30px;
+    line-height: 1.6;
+}
+
+/* Word Statistics
+   ========================================================================== */
+
+.word-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 15px;
+    background: #f7fafc;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    border-color: #667eea;
+    transform: translateY(-2px);
+}
+
+.stat-number {
+    display: block;
+    font-size: clamp(20px, 4vw, 28px);
+    font-weight: bold;
+    color: #667eea;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    display: block;
+    font-size: 12px;
+    color: #718096;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Quick Search Section
+   ========================================================================== */
+
+.quick-search-section {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 9px; /* Reduced from 30px by 70% */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.quick-search-section h2 {
+    text-align: center;
+    color: #2d3748;
+    margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.seo-search {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-input {
+    width: 100%;
+    padding: 15px 20px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    margin-bottom: 15px;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.search-filters {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: #f7fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #4a5568;
+    font-weight: 500;
+}
+
+.filter-btn:hover {
+    background: #edf2f7;
+    transform: translateY(-1px);
+}
+
+.filter-btn.active {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+}
+
+/* Words Section
+   ========================================================================== */
+
+.words-section {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 9px; /* Reduced from 30px by 70% */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.section-header h2 {
+    color: #2d3748;
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.sort-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sort-controls label {
+    font-size: 14px;
+    color: #4a5568;
+    font-weight: 500;
+}
+
+.sort-select {
+    background: #f7fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sort-select:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+/* SEO Word Grid
+   ========================================================================== */
+
+.seo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.seo-grid .word-card {
+    background: #f7fafc;
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    cursor: pointer;
+    position: relative;
+}
+
+.seo-grid .word-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    border-color: #667eea;
+}
+
+.seo-grid .word {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    color: #2d3748;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+    font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+}
+
+.seo-grid .word-score {
+    display: block;
+    font-size: 11px;
+    color: #718096;
+    font-weight: 500;
+}
+
+.seo-grid .word-definition {
+    display: block;
+    font-size: 10px;
+    color: #a0aec0;
+    margin-top: 2px;
+    font-style: italic;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Popular words styling */
+.seo-grid .word-card.popular {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+.seo-grid .word-card.popular .word,
+.seo-grid .word-card.popular .word-score,
+.seo-grid .word-card.popular .word-definition {
+    color: white;
+}
+
+/* Word badges */
+.word-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: #48bb78;
+    color: white;
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.word-card.wordle .word-badge {
+    background: #f6e05e;
+    color: #2d3748;
+}
+
+.word-card.scrabble .word-badge {
+    background: #9f7aea;
+}
+
+/* Loading States
+   ========================================================================== */
+
+.loading-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px 20px;
+    color: #718096;
+    font-style: italic;
+    font-size: 16px;
+}
+
+/* Load More Section
+   ========================================================================== */
+
+.load-more-section {
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px;
+}
+
+.load-more-btn {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 16px 40px; /* Increased padding for prominence */
+    border-radius: 25px;
+    font-size: 18px; /* Increased font size */
+    font-weight: 700; /* Increased font weight */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); /* Enhanced shadow */
+    text-transform: uppercase; /* Make it more prominent */
+    letter-spacing: 0.5px; /* Better spacing */
+}
+
+.load-more-btn:hover {
+    background: #5a67d8;
+    transform: translateY(-3px); /* More pronounced lift */
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+.load-more-btn:active {
+    transform: translateY(-1px);
+}
+
+/* Related Links Section
+   ========================================================================== */
+
+.related-links {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 9px; /* Reduced from 30px by 70% */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    max-width: 100%; /* Same container approach as search section */
+}
+
+.related-links h2 {
+    text-align: center;
+    color: #2d3748;
+    margin-bottom: 25px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+}
+
+.related-group h3 {
+    color: #4a5568;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 8px;
+}
+
+.related-group ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.related-group li {
+    margin-bottom: 6px;
+}
+
+.related-group a {
+    color: #667eea;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+    display: block;
+    padding: 4px 0;
+}
+
+.related-group a:hover {
+    color: #5a67d8;
+    padding-left: 5px;
+}
+
+/* FAQ Section
+   ========================================================================== */
+
+.faq-section {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 9px; /* Reduced from 30px by 70% */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    max-width: 100%; /* Same container approach as search section */
+}
+
+.faq-section h2 {
+    text-align: center;
+    color: #2d3748;
+    margin-bottom: 25px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.faq-item {
+    background: #f7fafc;
+    border-radius: 12px;
+    padding: 20px;
+    border-left: 4px solid #667eea;
+}
+
+.faq-item h3 {
+    color: #2d3748;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.faq-item p {
+    color: #4a5568;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Mobile Responsive
+   ========================================================================== */
+
+@media (max-width: 767px) {
+    .seo-hero {
+        padding: 20px 15px;
+        margin-bottom: 6px; /* Reduced spacing for mobile */
+    }
+    
+    .word-stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+    
+    .stat-item {
+        padding: 10px 5px;
+    }
+    
+    .quick-search-section {
+        padding: 20px 15px;
+        margin-bottom: 6px; /* Reduced spacing for mobile */
+    }
+    
+    .search-filters {
+        justify-content: center;
+    }
+    
+    .filter-btn {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+    
+    .words-section {
+        padding: 20px 15px;
+        margin-bottom: 6px; /* Reduced spacing for mobile */
+    }
+    
+    .section-header {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .sort-controls {
+        justify-content: center;
+    }
+    
+    .seo-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 8px;
+    }
+    
+    .seo-grid .word-card {
+        padding: 8px;
+    }
+    
+    .seo-grid .word {
+        font-size: 14px;
+        letter-spacing: 0.5px;
+    }
+    
+    .related-links {
+        padding: 20px 15px;
+        margin-bottom: 6px; /* Reduced spacing for mobile */
+    }
+    
+    .related-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .faq-section {
+        padding: 20px 15px;
+        margin-bottom: 6px; /* Reduced spacing for mobile */
+    }
+    
+    .faq-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .faq-item {
+        padding: 15px;
+    }
+    
+    .breadcrumb {
+        font-size: 12px;
+        gap: 4px;
+    }
+    
+    .breadcrumb li:not(:last-child)::after {
+        margin-left: 4px;
+    }
+    
+    /* Enhanced mobile load more button */
+    .load-more-btn {
+        padding: 14px 30px;
+        font-size: 16px;
+    }
+}
+
+/* Tablet Adjustments */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .seo-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+    
+    .related-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .faq-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Print Styles */
+@media print {
+    .breadcrumb-nav,
+    .quick-search-section,
+    .load-more-section,
+    .site-header,
+    .site-footer {
+        display: none;
+    }
+    
+    .seo-hero,
+    .words-section,
+    .related-links,
+    .faq-section {
+        box-shadow: none;
+        border: 1px solid #e2e8f0;
+        break-inside: avoid;
+    }
+    
+    .seo-grid {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .word-card {
+        border: 2px solid #000;
+    }
+    
+    .filter-btn.active,
+    .load-more-btn {
+        background: #000;
+        color: #fff;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
